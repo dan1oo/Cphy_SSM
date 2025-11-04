@@ -1,16 +1,16 @@
-## Cphy_SSM
+# Cphy_SSM
 
-# Description
+### Description
 
-# Directory Structure
+### Directory Structure
 
-# Plan of Implementation
+### Plan of Implementation
 
-# Planned Steps
+### Planned Steps
 
-# Contributions
+### Contributions
 
-# Notes and Resources
+### Notes and Resources
 
 
 https://huggingface.co/blog/lbourdois/get-on-the-ssm-train
