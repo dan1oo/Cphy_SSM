@@ -14,9 +14,9 @@ This project is based on Albert Gu's paper 'Efficiently Modeling Long Sequences 
 
 ### Plan of Implementation
 
-Week 1. Implement Model V1 Basic SSM, Preprocess Data/setup rough simulation
-Week 2. Training + Test Model on simulation and debug/optimize, Start visualization
-Week 3. Metric analysis + presentation creation
+- Week 1. Implement Model V1 Basic SSM, Preprocess Data/setup rough simulation
+- Week 2. Training + Test Model on simulation and debug/optimize, Start visualization
+- Week 3. Metric analysis + presentation creation
 
 ### Contributions
 
