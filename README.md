@@ -29,5 +29,5 @@ Week 3. Metric analysis + presentation creation
 
 ### Notes and Resources
 
-`https://huggingface.co/blog/lbourdois/get-on-the-ssm-train`
-`https://arxiv.org/abs/2111.00396`
+- `https://huggingface.co/blog/lbourdois/get-on-the-ssm-train`
+- `https://arxiv.org/abs/2111.00396`
