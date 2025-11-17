@@ -7,7 +7,7 @@ from helpers import sigmoid, binary_cross_entropy
 
 class SimpleSSM:
     """
-    Simple HiPPO/S4-style State Space Model.
+    Simple State Space Model.
 
     Discrete-time dynamics:
 
@@ -17,10 +17,6 @@ class SimpleSSM:
     where A is obtained from a HiPPO-LegS continuous-time operator
     and discretized with a bilinear transform.
 
-    This class:
-      - initializes A from HiPPO,
-      - learns B and C (and you can optionally fine-tune A),
-      - implements manual BPTT for a binary sequence task (e.g. copy task).
     """
 
     def __init__(
@@ -33,13 +29,13 @@ class SimpleSSM:
         learn_A: bool = True,
     ):
         """
-        Args:
-            state_dim:  size of state x_t
-            input_dim:  size of input u_t (for copy task, usually 1)
-            output_dim: size of output y_t (for copy task, usually 1)
-            dt:        time step for discretization
-            seed:      RNG seed
-            learn_A:   if False, A is frozen (fixed HiPPO operator);
+        
+        state_dim:  size of state x_t
+        input_dim:  size of input u_t (for copy task, usually 1)
+        output_dim: size of output y_t (for copy task, usually 1)
+        dt:        time step for discretization
+        randomseed:      RNG seed
+        learn_A:   if False, A is frozen (fixed HiPPO operator);
                        if True, A is updated by gradient descent.
         """
         self.state_dim = state_dim
