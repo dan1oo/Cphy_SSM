@@ -25,7 +25,7 @@ class generator:
         #input sequence
         in_seq = []
         for i in range(self.n):
-            in_seq.append(np.random.choice(list('123456789')))
+            in_seq.append(np.random.choice([1,2,3,4,5,6,7,8]))
         copy = in_seq.copy()
 
         in_seq += [0]*self.g
