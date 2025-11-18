@@ -42,7 +42,7 @@ class generator:
 
         
 
-        return in_seq, out_seq
+        return np.array(in_seq), np.array(out_seq)
 
    
         
