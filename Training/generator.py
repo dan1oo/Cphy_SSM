@@ -23,7 +23,7 @@ class generator:
         {n sequence to be memorized} + {g time-lag} + {delimiter to activate copying}+{n sequence copy}
         '''
         
-        #input sequence
+      
         seq = np.random.randint(1, 9, size=(self.n_data, self.n))
         zero1 = np.zeros((self.n_data, self.g-1))
         zero2 = np.zeros((self.n_data, self.g))
