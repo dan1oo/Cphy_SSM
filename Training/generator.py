@@ -20,7 +20,8 @@ class generator:
     def seq(self):
         '''
         input and output sequences are generated for training purposes
-        {n sequence to be memorized} + {g time-lag} + {delimiter to activate copying}+{n sequence copy}
+        input = {n sequence to be memorized} + {g time-lag} + {delimiter to activate copying}+{n sequence copy}
+        output = {0 padding} + {sequence copy}
         '''
         
       
