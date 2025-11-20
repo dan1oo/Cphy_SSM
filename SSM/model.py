@@ -1,6 +1,6 @@
 import numpy as np
-from hippo import hippo_legs, discretize_bilinear
-from helpers import sigmoid, binary_cross_entropy
+from SSM.hippo import hippo_legs, discretize_bilinear
+from SSM.helpers import sigmoid, binary_cross_entropy
 
 
 
@@ -44,7 +44,7 @@ class SimpleSSM:
         self.dt = dt
         self.learn_A = learn_A
 
-        np.random.normal(randomseed)
+        rng = np.random.default_rng(randomseed)
 
         # Continuous-time HiPPO-LegS operator
         A_ct = hippo_legs(state_dim)
@@ -53,8 +53,8 @@ class SimpleSSM:
         self.A = discretize_bilinear(A_ct, dt=dt)
 
         # Random B and C (small scale)
-        self.B = np.random.random( size=(state_dim, input_dim))
-        self.C = np.random.random( size=(output_dim, state_dim))
+        self.B = rng.normal(scale=0.1, size=(state_dim, input_dim))
+        self.C = rng.normal(scale=0.1, size=(output_dim, state_dim))
 
     
 
