@@ -11,7 +11,7 @@ In our project, we study how S4 performs on synthetic tasks like:
 
 We implemented the core model components, designed task generators, and evaluated how well S4 models long-term dependencies in toy data.
 
-## ⚙️ Implementation / Algorithm
+## ⚙️ Implementation and Algorithm
 
 ### 📚 Theoretical Background: State Space Models and S4
 
