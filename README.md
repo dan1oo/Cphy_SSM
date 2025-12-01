@@ -17,19 +17,16 @@ We implemented the core model components, designed task generators, and evaluate
 
 Structured State Space Models (SSM) describe the dynamics of a hidden state evolving in time and producing an output. The general form of a continuous-time SSM is:
 
-$$
-x'(t)=\mathbf{A}x(t)+\mathbf{B}u(t)
-$$
-$$
-y(t)=\mathbf{C}x(t)+\mathbf{D}u(t)
-$$
+<div align="center">
+  <img src="SSM.png" alt="ssm" width="400">
+</div>
 
 where:
 - $x(t) \in \mathbb{C}^n$: the $n$ state variables 
 - $u(t) \in \mathbb{C}^m$: the $m$ state inputs,  
 - $y(t) \in \mathbb{C}^p$: the $p$ outputs.
 
-and four learnable matrices, **A**, **B**, **C**, and **D**:
+and includes four learnable matrices, **A**, **B**, **C**, and **D**:
 
 - $\mathbf{A} \in \mathbb{C}^{n \times n}$: the state matrix (controlling the latent state $\mathbf{x}$) 
 - $\mathbf{B} \in \mathbb{C}^{n \times m}$: the control matrix 
