@@ -95,16 +95,31 @@ This section will be updated once model testing and training are finalized. In t
 
 ---
 
-To run this project, install the required packages using pip:
+### 🔧 Installation
+
+To install required packages, run:
 
 ```bash
-pip install numpy matplotlib sklearn
+pip install -r requirements.txt
+```
 
+This will install minimal dependencies like `numpy` and `matplotlib`.
 
-If using Jupyter notebooks:
+Make sure your project folder contains the following structure:
 
-pip install notebook
+├── SSM/
+│   ├── hippo.py
+│   ├── helpers.py
+    └── model.py
+├── Training/
+│   ├── generator_memory.py
+│   └── generator_prevbit.py
+├── demos.ipynb
+├── requirements.txt
 
+### 🚀 Running the model
+
+To train the model on one of the tasks:
 
 
 ## 🔍 Reflection and Future Work
