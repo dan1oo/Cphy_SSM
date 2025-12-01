@@ -62,11 +62,20 @@ This allows S4 to combine the benefits of continuous time modelling (interpretab
 
 ### Code Structure
 
-Our implementation follows the structure of Gu et al.'s reference.
-- 
+Our implementation follows the structure of Gu et al.'s reference and separates utility logic from model logic.
+- `hippo.py`: Generates the HiPPO matrix used for memory-preserving dynamics.
+- `helpers.py`: Contains functions for FFT-based kernel computation and DPLR manipulation.
+- `model.py`: Defines the core S4 layer/module using the DPLR parameterization and convolution kernel computation.
+- `generator_prevbit.py`/`generator_memory.py`: Defines the toy sequence tasks (bit prediction, memory recall).
+- `Training/` and `SSM/` folders: Contain separate modules for training and module logic.
 
 Our implementation mirrors the core steps of Algorithm 1:
-1. Construct 
+1. Construct $\mathbf{A}=\Lambda-PQ^*$
+2. Compute the Cauchy kernel using FFT
+3. Apply the Woodbury identity
+4. Evaluate $\hat{K}(\omega)$
+5. Apply inverse FFT to get kernel $K$
+6. Convolve $K$ with input sequence $u(t)$
 
 
 ## Package Installation and Examples
