@@ -29,7 +29,7 @@ where:
 - $u(t) \in \mathbb{C}^m$: the $m$ state inputs,  
 - $y(t) \in \mathbb{C}^p$: the $p$ outputs.
 
-We can also see that it's made up of four learnable matrices: **A**, **B**, **C**, and **D**.
+and four learnable matrices, **A**, **B**, **C**, and **D**:
 
 - $\mathbf{A} \in \mathbb{C}^{n \times n}$: the state matrix (controlling the latent state $\mathbf{x}$) 
 - $\mathbf{B} \in \mathbb{C}^{n \times m}$: the control matrix 
