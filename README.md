@@ -83,23 +83,23 @@ Our implementation mirrors the core steps of Algorithm 1:
 
 ## 📦 Package Installation and Examples
 
-Implementation and training are still in progress.
+> ⚠️ *Note: Implementation and training are still in progress.*
 
----
-NOTES (delete later):
+This section will be updated once model testing and training are finalized. In the final version, we plan to include:
+- `requirements.txt` for easy dependency installation
+- Example usage instructions for training and evaluation
+- A Jupyter notebook (`demos.ipynb`) demonstrating:
+  - Memory task performance
+  - Kernel visualization
+  - Model predictions on test sequences
 
-We plan to include:
-- A requirements.txt for dependency installation
-- Run instructions for our training/evaluation scripts
-- A Jupyter notebook (`demos.ipynb`) demonstrating kernel visualization and behavior on test sequences
-
-This section will be updated once we complete model testing and training.
 ---
 
 To run this project, install the required packages using pip:
 
 ```bash
 pip install numpy matplotlib sklearn
+
 
 If using Jupyter notebooks:
 
