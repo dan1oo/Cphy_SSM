@@ -163,11 +163,69 @@ class SimpleSSM:
 
         return loss, (dA, dB, dC)
 
-    def loss_and_grads_mse(self, u_seq, target_seq):
+    def loss_and_grads_mse(self, u_seq: np.ndarray, target_seq: np.ndarray):
         """
-        
+        NOTE: new addition by lily, can remove later after testing if it's not necessary
+
+        Compute mean squared error (MSE) loss and gradients via Backpropagation
+        Through Time (BPTT) for a single sequence.
+
+        Args:
+            u_seq:      (T, input_dim)    input sequence
+            target_seq: (T, output_dim)   target sequence in {0,1}
+
+        Returns:
+            loss:  scalar
+            grads: (dA, dB, dC) where each is the same shape as the parameter
         """
-        pass
+        # pass
+        logits, xs = self.forward(u_seq)       # (T, out_dim), (T+1, N)
+        T = u_seq.shape[0]
+
+        # MSE loss
+        diff = logits - target_seq              # (T, output_dim)
+        loss = np.mean(diff ** 2)
+
+        # gradients
+        dA = np.zeros_like(self.A)
+        dB = np.zeros_like(self.B)
+        dC = np.zeros_like(self.C)
+
+        N = self.state_dim
+        dx_next = np.zeros(N)  # gradient wrt x_{t} coming from future
+
+        # BPTT
+        for t in reversed(range(T)):
+            x_t = xs[t + 1]       # state after seeing u_t
+            x_prev = xs[t]        # previous state x_{t}
+            u_t = u_seq[t]
+
+            # dL/dlogit = p - y for BCE with sigmoid
+            dL_dlogit = 2 * diff[t] / T  # (output_dim,)
+
+            # gradient wrt C: y_t = C x_t
+            dC += dL_dlogit.reshape(-1, 1) @ x_t.reshape(1, -1) # (output_dim, N)
+
+            # gradient wrt x_t (current state), from output and from future
+            dx = self.C.T @ dL_dlogit.flatten() + dx_next  # (N,)
+
+            # x_t = A x_{t-1} + B u_t
+            dA += np.outer(dx, x_prev)
+            dB += np.outer(dx, u_t)
+
+            # propagate to previous state
+            dx_next = self.A.T @ dx
+
+        # average over time for stability
+        dA /= T
+        dB /= T
+        dC /= T
+
+        if not self.learn_A:
+            dA[:] = 0.0
+
+        return loss, (dA, dB, dC)
+
 
     def step(self, grads, lr: float = 1e-2, clip: float | None = 1.0):
         """
@@ -191,3 +249,4 @@ class SimpleSSM:
             self.A -= lr * dA
         self.B -= lr * dB
         self.C -= lr * dC
+print('hi')
