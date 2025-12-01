@@ -33,7 +33,6 @@ class generator:
             in_seq : shape (n_data, total_length)
             out_seq : shape (n_data, total_length)
         '''
-
         # Random memory sequences (integers 1-8)
         seq = np.random.randint(1, 9, size=(self.n_data, self.n))
 
@@ -51,10 +50,7 @@ class generator:
         # Construct output: [ zeros | zeros during delay | memory ]
         out_seq = np.concatenate((zero3, zero2, seq),axis = 1).reshape(self.n_data, -1)
         
-        return in_seq, out_seq
-
-
-   
+        return in_seq, out_seq  
         
 
 
