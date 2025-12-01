@@ -1,6 +1,6 @@
 # Efficient Sequence Modelling with Structured State Spaces (S4)
 
-## Introduction
+## 🌟 Introduction
 This project implements a simplified version of the **Structured State-Space Model (S4)** introduced by Gu et al. (2022). The S4 model is designed to efficiently handle long-range dependencies in sequences by leveraging signal processing tools, state space theory, and fast convolution via the Fourier domain. Unlike RNNs and Transformers, S4 achieves linear time complexity in sequence length while still capturing complex, long-range dependencies.
 
 S4 is part of a growing class of models that aim to overcome the limitations of attention-based architectures by revisiting classical system dynamics. It uses specially structured matrices (HiPPO operators, diagonal plus low-rank components) to maintain and evolve hidden states over time. These ideas are drawn from control theory and combine strong theoretical foundations with practical efficiency.
@@ -11,9 +11,9 @@ In our project, we study how S4 performs on synthetic tasks like:
 
 We implemented the core model components, designed task generators, and evaluated how well S4 models long-term dependencies in toy data.
 
-## Implementation / Algorithm
+## ⚙️ Implementation / Algorithm
 
-### Theoretical Background: State Space Models and S4
+### 📚 Theoretical Background: State Space Models and S4
 
 Structured State Space Models (SSM) describe the dynamics of a hidden state evolving in time and producing an output. The general form of a continuous-time SSM is:
 
@@ -57,7 +57,7 @@ Here, the convolution kernel $\mathbf{K}$ is computed using FFT-based techniques
 This allows S4 to combine the benefits of continuous time modelling (interpretable memory dynamics), long-range dependency handling (via HiPPO), and fast discrete convolution (via FFT and DPLR). **Figure 1** from the original paper also illustrates this three-part design philosophy:
 ![s4 parameterization](s4_param.png)
 
-### Code Structure
+### 📁 Code Structure
 
 Our implementation follows the structure of Gu et al.'s reference and separates utility logic from model logic.
 - `hippo.py`: Generates the HiPPO matrix used for memory-preserving dynamics.
@@ -75,10 +75,18 @@ Our implementation mirrors the core steps of Algorithm 1:
 6. Convolve $K$ with input sequence $u(t)$
 
 
-## Package Installation and Examples
-This project uses ..
+## 📦 Package Installation and Examples
 
-## Reflection and Future Work
+Implementation and training are still in progress.
+
+We plan to include:
+- A requirements.txt for dependency installation
+- Run instructions for our training/evaluation scripts
+- A Jupyter notebook (`demos.ipynb`) demonstrating kernel visualization and behavior on test sequences
+
+This section will be updated once we complete model testing and training.
+
+## 🔍 Reflection and Future Work
 We found this project both challenging and rewarding. At first, understanding the HiPPO framework and DPLR decomposition was conceptually difficult, but working through the code clarified how the theory translates into efficient computation. Writing our own kernel generation and FFT routines helped reinforce our understanding of spectral filtering.
 
 Challenges included:
@@ -92,7 +100,7 @@ Future improvements we'd like to explore:
 - Evaluate performance on real-world data (e.g. ECG, language)
 - Visualize intermediate activations and kernel responses
 
-### References
+### 📝 References
 [1] Gu, Albert et al. "Efficiently Modeling Long Sequences with Structured State Spaces." *ICLR 2022*. https://arxiv.org/abs/2111.00396
 
 [2] Gu, Albert et al. "HiPPO: Recurrent Memory with Optimal Polynomial Projections." *INSERT SOURCE PUBLISHER HERE*. https://arxiv.org/abs/2008.07669 
