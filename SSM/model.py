@@ -75,7 +75,7 @@ class SimpleSSM:
 
         Returns:
             logits: (T, output_dim) array (before sigmoid)
-            xs:     (T+1, state_dim) states (x_0, x_1, ..., x_T)
+            xs:     (T+1, state_dim) all states (x_0, x_1, ..., x_T)
         """
         T, in_dim = u_seq.shape
         assert in_dim == self.input_dim
@@ -101,8 +101,8 @@ class SimpleSSM:
 
     def loss_and_grads(self, u_seq: np.ndarray, target_seq: np.ndarray):
         """
-        Compute binary cross-entropy loss and gradients via BPTT for a single 
-        sequence.
+        Compute binary cross-entropy loss using sigmoid and gradients via 
+        Backpropagation Through Time (BPTT) for a single sequence.
 
         Args:
             u_seq:      (T, input_dim)    input sequence
