@@ -163,7 +163,11 @@ class SimpleSSM:
 
         return loss, (dA, dB, dC)
 
-
+    def loss_and_grads_mse(self, u_seq, target_seq):
+        """
+        
+        """
+        pass
 
     def step(self, grads, lr: float = 1e-2, clip: float | None = 1.0):
         """
