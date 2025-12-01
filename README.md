@@ -93,8 +93,6 @@ This section will be updated once model testing and training are finalized. In t
   - Kernel visualization
   - Model predictions on test sequences
 
----
-
 ### 🔧 Installation
 
 To install required packages, run:
