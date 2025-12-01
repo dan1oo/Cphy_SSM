@@ -85,12 +85,27 @@ Our implementation mirrors the core steps of Algorithm 1:
 
 Implementation and training are still in progress.
 
+---
+NOTES (delete later):
+
 We plan to include:
 - A requirements.txt for dependency installation
 - Run instructions for our training/evaluation scripts
 - A Jupyter notebook (`demos.ipynb`) demonstrating kernel visualization and behavior on test sequences
 
 This section will be updated once we complete model testing and training.
+---
+
+To run this project, install the required packages using pip:
+
+```bash
+pip install numpy matplotlib sklearn
+
+If using Jupyter notebooks:
+
+pip install notebook
+
+
 
 ## 🔍 Reflection and Future Work
 We found this project both challenging and rewarding. At first, understanding the HiPPO framework and DPLR decomposition was conceptually difficult, but working through the code clarified how the theory translates into efficient computation. Writing our own kernel generation and FFT routines helped reinforce our understanding of spectral filtering.
