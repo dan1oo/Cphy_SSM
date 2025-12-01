@@ -49,7 +49,8 @@ $$
     \end{cases}
 $$
 
-S4 introduces a new way to compute the model's input efficiently by converting the state evolution into a convolution: 
+S4 introduces a new way to compute the model's input efficiently by converting the state evolution into a convolution:
+ 
 $$
 y(t)=(\mathbf{K}u)(t)
 $$
