@@ -50,9 +50,9 @@ $$
 $$
 
 S4 introduces a new way to compute the model's input efficiently by converting the state evolution into a convolution:
-$$
-    y(t)=(\mathbf{K}*u)(t)
-$$
+
+`y(t)=(\mathbf{K}*u)(t)`
+
 
 Here, the convolution kernel$\mathbf{K}$ is computed using FFT-based techniques and a **DPLR (Diagonal Plus Low Rank)** representation of $\mathbf{A}$, which enables fast computation in the frequency domain. The full kernel computation is outlined in the paper's **Algorithm 1**:
 ![alt text](algo1.png)
