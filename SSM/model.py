@@ -249,4 +249,3 @@ class SimpleSSM:
             self.A -= lr * dA
         self.B -= lr * dB
         self.C -= lr * dC
-print('hi')
