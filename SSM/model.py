@@ -13,8 +13,13 @@ class SimpleSSM:
         x_{t+1} = A x_t + B u_t         (state update)
         y_t     = C x_t                 (output prediction)
 
-    A is a HiPPO-LegS continuous-time operator discretized with a bilinear 
+    where A is a HiPPO-LegS continuous-time operator discretized with a bilinear 
     transform.
+
+    x_t : internal state at time t
+    u_t : input at time t
+    A, B, C : model parameters
+    y_t : output (prediction)
     """
 
     def __init__(
