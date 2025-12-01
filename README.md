@@ -105,27 +105,34 @@ This will install minimal dependencies like `numpy` and `matplotlib`.
 
 Make sure your project folder contains the following structure:
 
+```text
 ├── SSM/
-
+    ├── helpers.py
 │   ├── hippo.py
-
-│   ├── helpers.py
-
-    └── model.py
-
+│   └── model.py
 ├── Training/
-
 │   ├── generator_memory.py
-
 │   └── generator_prevbit.py
-
 ├── demos.ipynb
-
 ├── requirements.txt
+```
 
 ### 🚀 Running the model
 
-To train the model on one of the tasks:
+To train the model on one of the tasks (PrevBit and Memory Copy), open:
+
+```bash
+demos.ipynb
+```
+
+Inside the notebook:
+- **PrevBit Task**: Trains the SSM in a binary sequence prediction task where the target is the previous bit.
+- **Memory Copy Task**: Trains the SSM to remember and recall a short sequence after a delay.
+- Includes visualizations of:
+  - Training loss over epochs
+  - Sequence predictions compared to actual output
+
+You can run each cell step-by-step and modify hyperparameters such as sequence length, delay, and state dimension as needed.
 
 
 ## 🔍 Reflection and Future Work
