@@ -15,7 +15,7 @@ We implemented the core model components, designed task generators, and evaluate
 
 ### Theoretical Background: State Space Models and S4
 
-Structured State Space Models (SSM) describe the dynamics of a hidden state evolving in time and producing an ouput. The general form of a continuous-time SSM is:
+Structured State Space Models (SSM) describe the dynamics of a hidden state evolving in time and producing an output. The general form of a continuous-time SSM is:
 
 $$
 x'(t)=\mathbf{A}x(t)+\mathbf{B}u(t)
@@ -51,7 +51,7 @@ $$
 y(t)=(\mathbf{K}\ast u)(t)
 $$
 
-Here, the convolution kernel$\mathbf{K}$ is computed using FFT-based techniques and a **DPLR (Diagonal Plus Low Rank)** representation of $\mathbf{A}$, which enables fast computation in the frequency domain. The full kernel computation is outlined in the paper's **Algorithm 1**:
+Here, the convolution kernel $\mathbf{K}$ is computed using FFT-based techniques and a **DPLR (Diagonal Plus Low Rank)** representation of $\mathbf{A}$, which enables fast computation in the frequency domain. The full kernel computation is outlined in the paper's **Algorithm 1**:
 ![s4 algo](algo1.png)
 
 This allows S4 to combine the benefits of continuous time modelling (interpretable memory dynamics), long-range dependency handling (via HiPPO), and fast discrete convolution (via FFT and DPLR). **Figure 1** from the original paper also illustrates this three-part design philosophy:
