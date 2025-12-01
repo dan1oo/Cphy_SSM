@@ -101,8 +101,6 @@ To install required packages, run:
 pip install -r requirements.txt
 ```
 
-This will install minimal dependencies like `numpy` and `matplotlib`.
-
 Make sure your project folder contains the following structure:
 
 ```text
