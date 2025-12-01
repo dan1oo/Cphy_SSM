@@ -18,15 +18,23 @@ We implemented the core model components, designed task generators, and evaluate
 Structured State Space Models (SSM) describe the dynamics of a hidden state evolving in time and producing an ouput. The general form of a continuous-time SSM is:
 
 $$
-x'(t)=\mathbf{A}x(t)+\mathbf{B}u(t)\\
+x'(t)=\mathbf{A}x(t)+\mathbf{B}u(t)
+$$
+$$
 y(t)=\mathbf{C}x(t)+\mathbf{D}u(t)
 $$
 
 where:
-- $x(t)$: latent state vector
-- $u(t)$: input signal
-- $y(t)$: output signal
-- $\mathbf{A},\mathbf{B},\mathbf{C},\mathbf{D}$: learnable model parameters
+- $x(t) \in \mathbb{C}^n$ represents the $n$ state variables,  
+- $u(t) \in \mathbb{C}^m$ represents the $m$ state inputs,  
+- $y(t) \in \mathbb{C}^p$ represents the $p$ outputs.
+
+We can also see that it's made up of four learnable matrices: **A**, **B**, **C**, and **D**.
+
+- $\mathbf{A} \in \mathbb{C}^{n \times n}$ is the state matrix (controlling the latent state $\mathbf{x}$),  
+- $\mathbf{B} \in \mathbb{C}^{n \times m}$ is the control matrix,  
+- $\mathbf{C} \in \mathbb{C}^{p \times n}$ is the output matrix,  
+- $\mathbf{D} \in \mathbb{C}^{p \times m}$ is the command matrix.
 
 State Space Models can capture long-range dependencies by appropriately parameterizing the transisiton matrix $A$. In S4 (Structured State Space Sequence model), the authors use a specific type of matrix called a **HiPPO matrix** to achieve this goal.
 
