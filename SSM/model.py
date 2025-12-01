@@ -3,20 +3,17 @@ from SSM.hippo import hippo_legs, discretize_bilinear
 from SSM.helpers import sigmoid, binary_cross_entropy
 
 
-
-
 class SimpleSSM:
     """
-    Simple State Space Model.
+    A simple state space model (SSM) for sequence modeling.
 
-    Discrete-time dynamics:
+    At each timestep:
 
-        x_{t+1} = A x_t + B u_t
-        y_t     = C x_t
+        x_{t+1} = A x_t + B u_t         (state update)
+        y_t     = C x_t                 (output prediction)
 
-    where A is obtained from a HiPPO-LegS continuous-time operator
-    and discretized with a bilinear transform.
-
+    A is a HiPPO-LegS continuous-time operator discretized with a bilinear 
+    transform.
     """
 
     def __init__(
@@ -29,6 +26,10 @@ class SimpleSSM:
         learn_A: bool = True,
     ):
         """
+        Set up model dimensions and initialize A, B, and C matrices.
+
+        A is based on a HiPPO operator and controls how state updates.
+        B maps input to state, C maps state to output.
         
         state_dim:  size of state x_t
         input_dim:  size of input u_t (for copy task, usually 1)
@@ -60,7 +61,8 @@ class SimpleSSM:
 
     def forward(self, u_seq: np.ndarray):
         """
-        Run the SSM forward over a sequence.
+        Run the SSM forward over a full input sequence and returns the output 
+        logits and state history.
 
         Args:
             u_seq: (T, input_dim) array of inputs
@@ -93,7 +95,8 @@ class SimpleSSM:
 
     def loss_and_grads(self, u_seq: np.ndarray, target_seq: np.ndarray):
         """
-        Compute loss and gradients via BPTT for a single sequence.
+        Compute binary cross-entropy loss and gradients via BPTT for a single 
+        sequence.
 
         Args:
             u_seq:      (T, input_dim)    input sequence
@@ -158,7 +161,8 @@ class SimpleSSM:
 
     def step(self, grads, lr: float = 1e-2, clip: float | None = 1.0):
         """
-        Gradient descent step.
+        Apply one gradient descent step to update A, B, and C. Optionally clips
+        gradients to prevent large updates.
 
         Args:
             grads: (dA, dB, dC) from loss_and_grads
@@ -177,3 +181,5 @@ class SimpleSSM:
             self.A -= lr * dA
         self.B -= lr * dB
         self.C -= lr * dC
+
+print('sup')
