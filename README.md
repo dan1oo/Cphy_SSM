@@ -107,7 +107,7 @@ Make sure your project folder contains the following structure:
 
 ```text
 ├── SSM/
-    ├── helpers.py
+│   ├── helpers.py
 │   ├── hippo.py
 │   └── model.py
 ├── Training/
