@@ -1,8 +1,9 @@
 import numpy as np
+from generator_memory import generate_memory_task
 
 """
 Generate data of T length to train. The data are sequences of characters that first consists
-of a short segmetn of informatino that have to be stored by the mode, followed by a varying 
+of a short segment of information that have to be stored by the mode, followed by a varying 
 length of blank inputs, then a marker value that informs the model when the stored information 
 should be recalled.
 
