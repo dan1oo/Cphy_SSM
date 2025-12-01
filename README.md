@@ -106,13 +106,21 @@ This will install minimal dependencies like `numpy` and `matplotlib`.
 Make sure your project folder contains the following structure:
 
 ├── SSM/
+
 │   ├── hippo.py
+
 │   ├── helpers.py
+
     └── model.py
+
 ├── Training/
+
 │   ├── generator_memory.py
+
 │   └── generator_prevbit.py
+
 ├── demos.ipynb
+
 ├── requirements.txt
 
 ### 🚀 Running the model
