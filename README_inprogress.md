@@ -31,9 +31,25 @@ We used the **DPLR (Diagonal Plus Low-Rank)** structure from the S4 paper to sta
 Each task uses random binary or continuous sequences to test how well S4 captures structure and memory over long ranges.
 
 ## Package Installation and Examples
-This project uses 
+This project uses ..
 
 ## Reflection and Future Work
+We found this project both challenging and rewarding. At first, understanding the HiPPO framework and DPLR decomposition was conceptually difficult, but working through the code clarified how the theory translates into efficient computation. Writing our own kernel generation and FFT routines helped reinforce our understanding of spectral filtering.
 
+Challenges included:
+- Ensuring numerical stability in kernel generation
+- Debugging FFT-based convolutions and shape mismatches
+- Interpreting synthetic task formats and outputs
+
+Future improvements we'd like to explore:
+- Run longer and more stable training runs
+- Compare against a simple RNN baseline
+- Evaluate performance on real-world data (e.g. ECG, language)
+- Visualize intermediate activations and kernel responses
 
 ### References
+[1] Gu, Albert et al. "Efficiently Modeling Long Sequences with Structured State Spaces." *ICLR 2022*. https://arxiv.org/abs/2111.00396
+
+[2] Gu, Albert et al. "HiPPO: Recurrent Memory with Optimal Polynomial Projections." *INSERT SOURCE PUBLISHER HERE*. https://arxiv.org/abs/2008.07669 
+
+[3] Bourdois, Romain. "Introduction to State Space Models (S4)." *Medium.com, 2024*. https://huggingface.co/blog/lbourdois/get-on-the-ssm-train
