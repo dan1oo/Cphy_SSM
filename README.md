@@ -18,7 +18,7 @@ We implemented the core model components, designed task generators, and evaluate
 Structured State Space Models (SSM) describe the dynamics of a hidden state evolving in time and producing an output. The general form of a continuous-time SSM is:
 
 <div align="center">
-  <img src="SSM.png" alt="ssm" width="400">
+  <img src="SSM.png" alt="ssm" width="250">
 </div>
 
 where:
