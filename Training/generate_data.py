@@ -1,5 +1,4 @@
 import numpy as np
-from generator_memory import generate_memory_task
 
 """
 Generate data of T length to train. The data are sequences of characters that first consists
