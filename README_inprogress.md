@@ -54,8 +54,20 @@ $$
     y(t)=(\mathbf{K}*u)(t)
 $$
 
-Here, the convolution kernel$\mathbf{K}$ is computed using FFT-based techniques and a **DPLR (Diagonal Plus Low Rank)** representation of $\mathbf{A}$, which enables fast computation in the frequency domain. The full kernel computation is outlined in the paper's **Algorithm 1** [1] (see figure):
+Here, the convolution kernel$\mathbf{K}$ is computed using FFT-based techniques and a **DPLR (Diagonal Plus Low Rank)** representation of $\mathbf{A}$, which enables fast computation in the frequency domain. The full kernel computation is outlined in the paper's **Algorithm 1**:
 ![alt text](algo1.png)
+
+This allows S4 to combine the benefits of continuous time modelling (interpretable memory dynamics), long-range dependency handling (via HiPPO), and fast discrete convolution (via FFT and DPLR). **Figure 1** from the original paper also illustrates this three-part design philosophy:
+![alt text](s4_param.png)
+
+### Code Structure
+
+Our implementation follows the structure of Gu et al.'s reference.
+- 
+
+Our implementation mirrors the core steps of Algorithm 1:
+1. Construct 
+
 
 ## Package Installation and Examples
 This project uses ..
