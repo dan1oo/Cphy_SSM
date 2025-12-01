@@ -60,7 +60,7 @@ Here, the convolution kernel $\mathbf{K}$ is computed using FFT-based techniques
 This allows S4 to combine the benefits of continuous time modelling (interpretable memory dynamics), long-range dependency handling (via HiPPO), and fast discrete convolution (via FFT and DPLR). **Figure 1** from the original paper also illustrates this three-part design philosophy:
 
 <div align="center">
-  <img src="s4_param.png" alt="s4 param" width="700">
+  <img src="s4_param.png" alt="s4 param" width="600">
 </div>
 
 ### 📁 Code Structure
