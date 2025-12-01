@@ -85,7 +85,7 @@ We model sequences using the discrete-time linear SSM equations:
 
 
 <div align="center">
-  <img src="simplified_ssm.png" alt="simplified ssm" width="300">
+  <img src="simplified_ssm.png" alt="simplified_ssm" width="300">
 </div>
 
 ## 📦 Package Installation and Examples
