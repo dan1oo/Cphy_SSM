@@ -25,16 +25,16 @@ y(t)=\mathbf{C}x(t)+\mathbf{D}u(t)
 $$
 
 where:
-- $x(t) \in \mathbb{C}^n$ represents the $n$ state variables,  
-- $u(t) \in \mathbb{C}^m$ represents the $m$ state inputs,  
-- $y(t) \in \mathbb{C}^p$ represents the $p$ outputs.
+- $x(t) \in \mathbb{C}^n$: the $n$ state variables 
+- $u(t) \in \mathbb{C}^m$: the $m$ state inputs,  
+- $y(t) \in \mathbb{C}^p$: the $p$ outputs.
 
 We can also see that it's made up of four learnable matrices: **A**, **B**, **C**, and **D**.
 
-- $\mathbf{A} \in \mathbb{C}^{n \times n}$ is the state matrix (controlling the latent state $\mathbf{x}$),  
-- $\mathbf{B} \in \mathbb{C}^{n \times m}$ is the control matrix,  
-- $\mathbf{C} \in \mathbb{C}^{p \times n}$ is the output matrix,  
-- $\mathbf{D} \in \mathbb{C}^{p \times m}$ is the command matrix.
+- $\mathbf{A} \in \mathbb{C}^{n \times n}$: the state matrix (controlling the latent state $\mathbf{x}$) 
+- $\mathbf{B} \in \mathbb{C}^{n \times m}$: the control matrix 
+- $\mathbf{C} \in \mathbb{C}^{p \times n}$: the output matrix 
+- $\mathbf{D} \in \mathbb{C}^{p \times m}$: the command matrix
 
 State Space Models can capture long-range dependencies by appropriately parameterizing the transisiton matrix $A$. In S4 (Structured State Space Sequence model), the authors use a specific type of matrix called a **HiPPO matrix** to achieve this goal.
 
