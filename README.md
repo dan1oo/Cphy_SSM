@@ -69,13 +69,14 @@ Our implementation follows the structure of Gu et al.'s reference and separates 
 - `generator_prevbit.py`/`generator_memory.py`: Defines the toy sequence tasks (bit prediction, memory recall).
 - `Training/` and `SSM/` folders: Contain separate modules for training and module logic.
 
-Our implementation mirrors the main steps of Algorithm 1:
+<!-- NOTE: take this out since our implementation doesn't use FFT explicitely -->
+<!-- Our implementation mirrors the main steps of Algorithm 1:
 1. Construct $\mathbf{A}=\Lambda-PQ^*$
 2. Compute the Cauchy kernel using FFT
 3. Apply the Woodbury identity
 4. Evaluate $\hat{K}(\omega)$
 5. Apply inverse FFT to get kernel $K$
-6. Convolve $K$ with input sequence $u(t)$
+6. Convolve $K$ with input sequence $u(t)$ -->
 
 Our project implements a simplified version of the S4 (Structured State Space
 Sequence) model to study the dynamics of sequence modelling using linear state
@@ -83,6 +84,7 @@ space models (SSM).
 
 We model sequences using the discrete-time linear SSM equations:
 
+NOTE: FINISH THIS PART UP LATER
 
 <div align="center">
   <img src="simplified_ssm.png" alt="simplified_ssm" width="300">
