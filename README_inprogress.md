@@ -39,7 +39,7 @@ We can also see that it's made up of four learnable matrices: **A**, **B**, **C*
 State Space Models can capture long-range dependencies by appropriately parameterizing the transisiton matrix $A$. In S4 (Structured State Space Sequence model), the authors use a specific type of matrix called a **HiPPO matrix** to achieve this goal.
 
 The HiPPO matrix, defined below, ensures that recent inputs are remembered more strongly while still accounting for information from far in the past:
-![alt text](hippo_matrix.png)
+<img src="hippo_matrix.png" alt="HiPPO matrix definition" width="300">
 
 $$
 \mathbf{A}_{nk}=
@@ -57,10 +57,10 @@ y(t)=(\mathbf{K}\ast u)(t)
 $$
 
 Here, the convolution kernel$\mathbf{K}$ is computed using FFT-based techniques and a **DPLR (Diagonal Plus Low Rank)** representation of $\mathbf{A}$, which enables fast computation in the frequency domain. The full kernel computation is outlined in the paper's **Algorithm 1**:
-![alt text](algo1.png)
+![s4 algo](algo1.png)
 
 This allows S4 to combine the benefits of continuous time modelling (interpretable memory dynamics), long-range dependency handling (via HiPPO), and fast discrete convolution (via FFT and DPLR). **Figure 1** from the original paper also illustrates this three-part design philosophy:
-![alt text](s4_param.png)
+![s4 parameterization](s4_param.png)
 
 ### Code Structure
 
