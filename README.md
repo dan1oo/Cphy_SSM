@@ -84,7 +84,7 @@ space models (SSM).
 
 We model sequences using the discrete-time linear SSM equations:
 
-NOTE: FINISH THIS PART UP LATER
+NOTE: FINISH THIS PART UP LATER, also move it higher up in the implementation section
 
 <div align="center">
   <img src="simplified_ssm.png" alt="simplified_ssm" width="300">
