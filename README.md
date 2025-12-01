@@ -1,33 +1,114 @@
-# Cphy_SSM
+# Efficient Sequence Modelling with Structured State Spaces (S4)
 
-### Description
+## 🌟 Introduction
+This project implements a simplified version of the **Structured State-Space Model (S4)** introduced by Gu et al. (2022). The S4 model is designed to efficiently handle long-range dependencies in sequences by leveraging signal processing tools, state space theory, and fast convolution via the Fourier domain. Unlike RNNs and Transformers, S4 achieves linear time complexity in sequence length while still capturing complex, long-range dependencies.
 
-This project is based on Albert Gu's paper 'Efficiently Modeling Long Sequences with Structured State Spaces': `https://arxiv.org/abs/2111.00396`. We aim to implement a single head of this model, and apply it to a simple long sequence prediction challenge and evaulate and visualize it's performance. Our goal is to understand and implement the structured S4 state space model and allow it to run on a local device following all the nuances and matrix operations outline in the paper. We want to focus on long range dependencies. We want to compute NPLR (normal + low rank parameterization) using the 'cauchy kernel'.
+S4 is part of a growing class of models that aim to overcome the limitations of attention-based architectures by revisiting classical system dynamics. It uses specially structured matrices (HiPPO operators, diagonal plus low-rank components) to maintain and evolve hidden states over time. These ideas are drawn from control theory and combine strong theoretical foundations with practical efficiency.
 
-### Directory Structure
+In our project, we study how S4 performs on synthetic tasks like:
+- **Memory task:** remembering and reproducing a value from earlier in the sequence.
+- **Previous-bit task:** predicting a specific bit from a prior time step.
 
-- `demos.ipynb` - Script for Model implementation demo on arbitrary simulation
-- `.\SSM` - Containerized State Space Model (in one class ideally)
-- `.\Simulations`- Simulation Scripts 
-- `.\Helpers` - Helper functions for data + metric testing 
-- `.\Data` - Data
+We implemented the core model components, designed task generators, and evaluated how well S4 models long-term dependencies in toy data.
 
-### Plan of Implementation
+## ⚙️ Implementation / Algorithm
 
-- Week 1. Implement Model V1 Basic SSM, Preprocess Data/setup rough simulation
-- Week 2. Training + Test Model on simulation and debug/optimize, Start visualization
-- Week 3. Metric analysis + presentation creation
+### 📚 Theoretical Background: State Space Models and S4
 
-### Contributions
+Structured State Space Models (SSM) describe the dynamics of a hidden state evolving in time and producing an output. The general form of a continuous-time SSM is:
 
-- Creating project proposal: Lily, Daniel
-- Model Development - Daniel
-- Simulation Scripting - Lily
-- Data preprocessing and testing - Nurali
-- Visualization - Daniel
-- Presentation - Lily
+$$
+x'(t)=\mathbf{A}x(t)+\mathbf{B}u(t)
+$$
+$$
+y(t)=\mathbf{C}x(t)+\mathbf{D}u(t)
+$$
 
-### Notes and Resources
+where:
+- $x(t) \in \mathbb{C}^n$: the $n$ state variables 
+- $u(t) \in \mathbb{C}^m$: the $m$ state inputs,  
+- $y(t) \in \mathbb{C}^p$: the $p$ outputs.
 
-- `https://huggingface.co/blog/lbourdois/get-on-the-ssm-train`
-- `https://arxiv.org/abs/2111.00396`
+We can also see that it's made up of four learnable matrices: **A**, **B**, **C**, and **D**.
+
+- $\mathbf{A} \in \mathbb{C}^{n \times n}$: the state matrix (controlling the latent state $\mathbf{x}$) 
+- $\mathbf{B} \in \mathbb{C}^{n \times m}$: the control matrix 
+- $\mathbf{C} \in \mathbb{C}^{p \times n}$: the output matrix 
+- $\mathbf{D} \in \mathbb{C}^{p \times m}$: the command matrix
+
+State Space Models can capture long-range dependencies by appropriately parameterizing the transisiton matrix $A$. In S4 (Structured State Space Sequence model), the authors use a specific type of matrix called a **HiPPO matrix** to achieve this goal.
+
+The HiPPO matrix defines a memory-preserving operator that emphasizes recent inputs while still retaining information from the distant past: 
+
+<div align="center">
+  <img src="hippo_matrix.png" alt="HiPPO matrix definition" width="400">
+</div>
+
+
+S4 introduces a new way to compute the model's input efficiently by converting the state evolution into a convolution:
+
+$$
+y(t)=(\mathbf{K}\ast u)(t)
+$$
+
+Here, the convolution kernel $\mathbf{K}$ is computed using FFT-based techniques and a **DPLR (Diagonal Plus Low Rank)** representation of $\mathbf{A}$, which enables fast computation in the frequency domain. The full kernel computation is outlined in the paper's **Algorithm 1**:
+
+<div align="center">
+  <img src="algo1.png" alt="algo1" width="600">
+</div>
+
+This allows S4 to combine the benefits of continuous time modelling (interpretable memory dynamics), long-range dependency handling (via HiPPO), and fast discrete convolution (via FFT and DPLR). **Figure 1** from the original paper also illustrates this three-part design philosophy:
+
+<div align="center">
+  <img src="s4_param.png" alt="s4 param" width="600">
+</div>
+
+### 📁 Code Structure
+
+Our implementation follows the structure of Gu et al.'s reference and separates utility logic from model logic.
+- `hippo.py`: Generates the HiPPO matrix used for memory-preserving dynamics.
+- `helpers.py`: Contains functions for FFT-based kernel computation and DPLR manipulation.
+- `model.py`: Defines the core S4 layer/module using the DPLR parameterization and convolution kernel computation.
+- `generator_prevbit.py`/`generator_memory.py`: Defines the toy sequence tasks (bit prediction, memory recall).
+- `Training/` and `SSM/` folders: Contain separate modules for training and module logic.
+
+Our implementation mirrors the core steps of Algorithm 1:
+1. Construct $\mathbf{A}=\Lambda-PQ^*$
+2. Compute the Cauchy kernel using FFT
+3. Apply the Woodbury identity
+4. Evaluate $\hat{K}(\omega)$
+5. Apply inverse FFT to get kernel $K$
+6. Convolve $K$ with input sequence $u(t)$
+
+
+## 📦 Package Installation and Examples
+
+Implementation and training are still in progress.
+
+We plan to include:
+- A requirements.txt for dependency installation
+- Run instructions for our training/evaluation scripts
+- A Jupyter notebook (`demos.ipynb`) demonstrating kernel visualization and behavior on test sequences
+
+This section will be updated once we complete model testing and training.
+
+## 🔍 Reflection and Future Work
+We found this project both challenging and rewarding. At first, understanding the HiPPO framework and DPLR decomposition was conceptually difficult, but working through the code clarified how the theory translates into efficient computation. Writing our own kernel generation and FFT routines helped reinforce our understanding of spectral filtering.
+
+Challenges included:
+- Ensuring numerical stability in kernel generation
+- Debugging FFT-based convolutions and shape mismatches
+- Interpreting synthetic task formats and outputs
+
+Future improvements we'd like to explore:
+- Run longer and more stable training runs
+- Compare against a simple RNN baseline
+- Evaluate performance on real-world data (e.g. ECG, language)
+- Visualize intermediate activations and kernel responses
+
+### 📝 References
+[1] Gu, Albert et al. "Efficiently Modeling Long Sequences with Structured State Spaces." *ICLR 2022*. https://arxiv.org/abs/2111.00396
+
+[2] Gu, Albert et al. "HiPPO: Recurrent Memory with Optimal Polynomial Projections." *INSERT SOURCE PUBLISHER HERE*. https://arxiv.org/abs/2008.07669 
+
+[3] Bourdois, Romain. "Introduction to State Space Models (S4)." *Medium.com, 2024*. https://huggingface.co/blog/lbourdois/get-on-the-ssm-train
