@@ -9,7 +9,7 @@ def hippo_legs(N: int) -> np.ndarray:
 
         A_{n,m} =
             -sqrt((2n+1)(2m+1))   if n > m
-            -(2n+1)               if n = m
+            -(n+1)               if n = m
             0                     if n < m
     """
     A = np.zeros((N, N))
@@ -18,7 +18,7 @@ def hippo_legs(N: int) -> np.ndarray:
             if n > m:
                 A[n, m] = -np.sqrt((2 * n + 1) * (2 * m + 1))
             elif n == m:
-                A[n, m] = -(2 * n + 1)
+                A[n, m] = -(n + 1)
             # else: A[n, m] = 0
     return A
 
