@@ -5,7 +5,8 @@ from SSM.helpers import sigmoid, binary_cross_entropy
 
 class SimpleSSM:
     """
-    A simple state space model (SSM) for sequence modeling.
+    A Simple State Space Model (SSM), which is a minimal implementation of the
+    S4/HiPPO-based state-space sequence model.
 
     At each timestep:
 
