@@ -40,7 +40,10 @@ State Space Models can capture long-range dependencies by appropriately paramete
 
 The HiPPO matrix, defined below, ensures that recent inputs are remembered more strongly while still accounting for information from far in the past:
 
-<img src="hippo_matrix.png" alt="HiPPO matrix definition" width="300">
+<div align="center">
+  <img src="hippo_matrix.png" alt="HiPPO matrix definition" width="400">
+</div>
+
 
 S4 introduces a new way to compute the model's input efficiently by converting the state evolution into a convolution:
 
