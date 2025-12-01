@@ -13,22 +13,41 @@ We implemented the core model components, designed task generators, and evaluate
 
 ## Implementation / Algorithm
 
-Our implementation is organized into two main components:
+### Theoretical Background: State Space Models and S4
 
-### 1. S4 Model core (in `SSM/`)
-- `model.py`: Computes the S4 kernel, performs convolution via FFT, and applies the model to input sequences.
-- `hippo.py`: Constructs the HiPPO matrix $A$ and defines its NPLR (Normal Plus Low Rank) decomposition.
-- `helpers.py`: Implements the Cauchy kernel computation, FFT-based convolution, and other linear algebra tools.
+Structured State Space Models (SSM) describe the dynamics of a hidden state evolving in time and producing an ouput. The general form of a continuous-time SSM is:
 
-We used the **DPLR (Diagonal Plus Low-Rank)** structure from the S4 paper to stabilize and accelerate kernel generation.
+$$
+x'(t)=\mathbf{A}x(t)+\mathbf{B}u(t)\\
+y(t)=\mathbf{C}x(t)+\mathbf{D}u(t)
+$$
 
-### 2. Synthetic Task Setup (in `Training/`)
-- `generatedata.py`: Main entry point for running experiments. Takes arguments for task, sequence length, model type, etc.
-- `generator_memory.py`: Defines the memory task (model must recall a token seen earlier in the input)
-- `generator_prevbit.py`: Defines the previous-bit task (predict a past bit from a fixed index).
-- Training notebooks (`attempt*.ipynb`) shows our earlier runs and test code.
+where:
+- $x(t)$: latent state vector
+- $u(t)$: input signal
+- $y(t)$: output signal
+- $\mathbf{A},\mathbf{B},\mathbf{C},\mathbf{D}$: learnable model parameters
 
-Each task uses random binary or continuous sequences to test how well S4 captures structure and memory over long ranges.
+State Space Models can capture long-range dependencies by appropriately parameterizing the transisiton matrix $A$. In S4 (Structured State Space Sequence model), the authors use a specific type of matrix called a **HiPPO matrix** to achieve this goal.
+
+The HiPPO matrix, defined below, ensures that recent inputs are remembered more strongly while still accounting for information from far in the past:
+
+$$
+\mathbf{A}_{nk}=
+    \begin{cases}
+        -(2n+1)^{1/2}(2k+1)^{1/2},\quad n>k\\
+        -(n+1),\quad n=k\\
+        0,\quad n<k
+    \end{cases}
+$$
+
+S4 introduces a new way to compute the model's input efficiently by converting the state evolution into a convolution:
+$$
+    y(t)=(\mathbf{K}*u)(t)
+$$
+
+Here, the convolution kernel$\mathbf{K}$ is computed using FFT-based techniques and a **DPLR (Diagonal Plus Low Rank)** representation of $\mathbf{A}$, which enables fast computation in the frequency domain. The full kernel computation is outlined in the paper's **Algorithm 1** [1] (see figure):
+![alt text](algo1.png)
 
 ## Package Installation and Examples
 This project uses ..
