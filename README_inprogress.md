@@ -13,9 +13,25 @@ We implemented the core model components, designed task generators, and evaluate
 
 ## Implementation / Algorithm
 
+Our implementation is organized into two main components:
+
+1. S4 Model core (in `SSM/`)
+- `model.py`: Computes the S4 kernel, performs convolution via FFT, and applies the model to input sequences.
+- `hippo.py`: Constructs the HiPPO matrix $A$ and defines its NPLR (Normal Plus Low Rank) decomposition.
+- `helpers.py`: Implements the Cauchy kernel computation, FFT-based convolution, and other linear algebra tools.
+
+We used the **DPLR (Diagonal Plus Low-Rank)** structure from the S4 paper to stabilize and accelerate kernel generation.
+
+2. Synthetic Task Setup (in `Training/`)
+- `generatedata.py`: Main entry point for running experiments. Takes arguments for task, sequence length, model type, etc.
+- `generator_memory.py`: Defines the memory task (model must recall a token seen earlier in the input)
+- `generator_prevbit.py`: Defines the previous-bit task (predict a past bit from a fixed index).
+- Training notebooks (`attempt*.ipynb`) shows our earlier runs and test code.
+
+Each task uses random binary or continuous sequences to test how well S4 captures structure and memory over long ranges.
 
 ## Package Installation and Examples
-
+This project uses 
 
 ## Reflection and Future Work
 
