@@ -38,7 +38,7 @@ We can also see that it's made up of four learnable matrices: **A**, **B**, **C*
 
 State Space Models can capture long-range dependencies by appropriately parameterizing the transisiton matrix $A$. In S4 (Structured State Space Sequence model), the authors use a specific type of matrix called a **HiPPO matrix** to achieve this goal.
 
-The HiPPO matrix, defined below, ensures that recent inputs are remembered more strongly while still accounting for information from far in the past:
+The HiPPO matrix defines a memory-preserving operator that emphasizes recent inputs while still retaining information from the distant past: 
 
 <div align="center">
   <img src="hippo_matrix.png" alt="HiPPO matrix definition" width="400">
