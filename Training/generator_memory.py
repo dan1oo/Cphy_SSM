@@ -33,14 +33,14 @@ class generator:
             in_seq : shape (n_data, total_length)
             out_seq : shape (n_data, total_length)
         '''
-        
+
         # Random memory sequences (integers 1-8)
         seq = np.random.randint(1, 9, size=(self.n_data, self.n))
 
         # Delay and padding zeros
-        zero1 = np.zeros((self.n_data, self.g-1))       # delay
-        zero2 = np.zeros((self.n_data, self.g))         # delay in output    
-        zero3 = np.zeros((self.n_data, self.n))         # post-delimeter zeros
+        zero1 = np.zeros((self.n_data, self.g-1))   # delay
+        zero2 = np.zeros((self.n_data, self.g))     # delay in output    
+        zero3 = np.zeros((self.n_data, self.n))     # post-delimeter zeros
 
         # Delimeter that signals recall
         delim = self.d * np.ones((self.n_data, 1)) 
