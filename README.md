@@ -77,6 +77,16 @@ Our implementation mirrors the main steps of Algorithm 1:
 5. Apply inverse FFT to get kernel $K$
 6. Convolve $K$ with input sequence $u(t)$
 
+Our project implements a simplified version of the S4 (Structured State Space
+Sequence) model to study the dynamics of sequence modelling using linear state
+space models (SSM).
+
+We model sequences using the discrete-time linear SSM equations:
+
+
+<div align="center">
+  <img src="simplified_ssm.png" alt="simplified ssm" width="300">
+</div>
 
 ## 📦 Package Installation and Examples
 
