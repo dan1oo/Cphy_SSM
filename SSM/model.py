@@ -67,8 +67,8 @@ class SimpleSSM:
 
     def forward(self, u_seq: np.ndarray):
         """
-        Run the SSM forward over a full input sequence and returns the output 
-        logits and state history.
+        Run the SSM forward over a sequence of inputs and computes predictions
+        and intermediate states.
 
         Args:
             u_seq: (T, input_dim) array of inputs
