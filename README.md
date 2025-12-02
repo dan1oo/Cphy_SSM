@@ -3,7 +3,7 @@
 ## 🌟 Introduction
 This project implements a simplified version of the **Structured State-Space Model (S4)** introduced by Gu et al. (2022), which is designed for efficient and scalable sequence modelling. Unlike RNNs or Transformers, S4 handles **long-range dependencies** with linear time complexity by combining tools from signal processing, control theory, and fast Fourier transforms.
 
-Fundamentally, S4 revisits classical continuous-time **state space models** and adapts them for deep learning. It uses structured matrices, such as **HiPPO operators** and **Diagonal Plus Low-Rank (DPLR)** representations to evolve hidden states to emphasize recent inputs while preserving global context. These techniques allow S4 to model sequences efficiently...
+Fundamentally, S4 revisits classical continuous-time **state space models** and adapts them for deep learning. It uses structured matrices, such as **HiPPO operators** and **Diagonal Plus Low-Rank (DPLR)** representations, to evolve hidden states to emphasize recent inputs while preserving global context. These techniques allow S4 to model sequences efficiently with both rigorous design and practical scalability.
 
 In this project, we explore a minimal HiPPO-based state space model inspired by S4. Rather than implementing the full S4 pipeline with FFT-based kernel generation and DPLR compression, we focus on a simpler architecture that uses discretized HiPPO matrices, linear state updates over time, and gradient-based training via backpropagation through time (BPTT).
 
