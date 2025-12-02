@@ -50,12 +50,13 @@ known continuous-time dynamics. These matrices are then discretized for implemen
 Rather than implementing the full S4 algorithm (which includes FFT-based convolution and a DPLR [Diagonal Plus Low Rank]
 representation), our implementation focuses on a more simplified interpretation of SSMs using:
 - Discretized HiPPO-LegS matrices
-- Standard matrix recurrence: $x_{t+1}=\mathbf{x}_t+\mathbf{B}u_t$
+- Standard matrix recurrence: $x_{t+1}=\mathbf{A}x_t+\mathbf{B}u_t$
 - Output prediction: $y_t=\mathbf{C}x_t$
 - Training via backpropagation through time (BPTT)
 
-This design allows us to study the memory and recurrence dynamics of S4-like models while keeping the codebase
-manageable and easy to understand.
+<!-- This design allows us to study the memory and recurrence dynamics of S4-like models while keeping the codebase manageable and easy to understand.  -->
+
+The S4 model combines continuous-time state space dynamics, HiPPO-based long-range memory, and fast discrete comvolution for efficient sequence modelling (Gu et al.).
 
 <div align="center">
   <img src="s4_param.png" alt="s4 param" width="600">
@@ -102,9 +103,9 @@ Our training loop operates as follows:
   - Optionally apply clipping to prevent exploding gradients
   - Update parameters $\mathbf{A}, \mathbf{B}, \mathbf{C}$
 
-<div align="center">
+<!-- <div align="center">
   <img src="simplified_ssm.png" alt="simplified_ssm" width="300">
-</div>
+</div> -->
 
 ## 📦 Package Installation and Examples
 
