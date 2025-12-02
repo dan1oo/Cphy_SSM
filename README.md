@@ -15,7 +15,8 @@ We implemented the core model components, designed task generators, and evaluate
 
 ### 📚 Theoretical Background: State Space Models and S4
 
-Structured State Space Models (SSM) describe the dynamics of a hidden state evolving in time and producing an output. The general form of a continuous-time SSM is:
+Structured State Space Models (SSM) describe how a latent state evolves over time in response to inputs and produces outputs..
+The general form of a continuous-time linear-time-invariant (LTI) SSM is:
 
 <div align="center">
   <img src="SSM.png" alt="ssm" width="250">
@@ -33,28 +34,28 @@ and includes four learnable matrices, **A**, **B**, **C**, and **D**:
 - $\mathbf{C} \in \mathbb{C}^{p \times n}$: the output matrix 
 - $\mathbf{D} \in \mathbb{C}^{p \times m}$: the command matrix
 
-State Space Models can capture long-range dependencies by appropriately parameterizing the transisiton matrix $A$. In S4 (Structured State Space Sequence model), the authors use a specific type of matrix called a **HiPPO matrix** to achieve this goal.
+These systems can model long-range dependencies in sequential data, especially when $\mathbf{A}$ is structured properly.
 
-The HiPPO matrix defines a memory-preserving operator that emphasizes recent inputs while still retaining information from the distant past: 
+In the S4 (Structured State Space Sequence) model proposed by Gu et al., the matrix $\mathbf{A}$ is parameterized using
+a **HiPPO matrix**, which is designed to preserve memory of past inputs with exponentially decaying weights:
 
 <div align="center">
   <img src="hippo_matrix.png" alt="HiPPO matrix definition" width="400">
 </div>
 
+The HiPPO (High-Order Polynomial Projection Operator) framework projects the input function onto a polynomial
+basis. A specific instance, **HiPPO LegS**, uses the Legendre Polynomial basis and results in a matrix with 
+known continuous-time dynamics. These matrices are then discretized for implementation in modelling dynamic systems.
 
-S4 introduces a new way to compute the model's input efficiently by converting the state evolution into a convolution:
+Rather than implementing the full S4 algorithm (which includes FFT-based convolution and a DPLR [Diagonal Plus Low Rank]
+representation), our implementation focuses on a more simplified interpretation of SSMs using:
+- Discretized HiPPO-LegS matrices
+- Standard matrix recurrence: $x_{t+1}=\mathbf{x}_t+\mathbf{B}u_t$
+- Output prediction: $y_t=\mathbf{C}x_t$
+- Training via backpropagation through time (BPTT)
 
-<div align="center">
-  <img src="k.png" alt="convolution" width="170">
-</div>
-
-Here, the convolution kernel $\mathbf{K}$ is computed using FFT-based techniques and a **DPLR (Diagonal Plus Low Rank)** representation of $\mathbf{A}$, which enables fast computation in the frequency domain. The full kernel computation is outlined in the paper's **Algorithm 1**:
-
-<div align="center">
-  <img src="algo1.png" alt="algo1" width="600">
-</div>
-
-This allows S4 to combine the benefits of continuous time modelling (interpretable memory dynamics), long-range dependency handling (via HiPPO), and fast discrete convolution (via FFT and DPLR). **Figure 1** from the original paper also illustrates this three-part design philosophy:
+This design allows us to study the memory and recurrence dynamics of S4-like models while keeping the codebase
+manageable and easy to understand.
 
 <div align="center">
   <img src="s4_param.png" alt="s4 param" width="600">
@@ -62,29 +63,44 @@ This allows S4 to combine the benefits of continuous time modelling (interpretab
 
 ### 📁 Code Structure
 
-Our implementation follows the structure of Gu et al.'s reference and separates utility logic from model logic.
-- `hippo.py`: Generates the HiPPO matrix used for memory-preserving dynamics.
-- `helpers.py`: Contains functions for FFT-based kernel computation and DPLR manipulation.
-- `model.py`: Defines the core S4 layer/module using the DPLR parameterization and convolution kernel computation.
-- `generator_prevbit.py`/`generator_memory.py`: Defines the toy sequence tasks (bit prediction, memory recall).
-- `Training/` and `SSM/` folders: Contain separate modules for training and module logic.
+Here is a summary of how each module contributes to the implementation:
+- `hippo.py`:
+  - Constructs the **HiPPO-LegS** matrix $\mathbf{A}$ in continuous time
+  - Discretizes $\mathbf{A}$ using bilinear (Tustin) transform to give a learnable discrete-time state transition matrix
+- `helpers.py`:
+  - Defines utility functions:
+    - `sigmoid()`: maps logits to probabilities
+    - `binary_cross_entropy()`: used to compute classification loss
+- `model.py`:
+  - Defines the class `SimpleSSM`, our main model
+  - Implements the recurrence $x_{t+1}=\mathbf{A}x_{t}+\mathbf{B}u_t$, $y_t=\mathbf{C}x_t$
+  - Includes:
+    - `forward()`: computes outputs over time
+    - `loss_and_grads()`: computes binary-cross-entropy and gradients via BPTT
+    - `loss_and_grads_mse()`: an alternate loss function (MSE)
+    - `step()`: applies gradient descent with optional clipping
+- `generator_prevbit.py`/`generator_memory.py`
+  - Defines toy tasks for evaluating sequence learning (bit prediction, memory recall)
+- `Training/`:
+  - Houses all data and training logic
+- `SSM/`:
+  - Houses all modules for model logic
 
-<!-- NOTE: take this out since our implementation doesn't use FFT explicitely -->
-<!-- Our implementation mirrors the main steps of Algorithm 1:
-1. Construct $\mathbf{A}=\Lambda-PQ^*$
-2. Compute the Cauchy kernel using FFT
-3. Apply the Woodbury identity
-4. Evaluate $\hat{K}(\omega)$
-5. Apply inverse FFT to get kernel $K$
-6. Convolve $K$ with input sequence $u(t)$ -->
 
-Our project implements a simplified version of the S4 (Structured State Space
-Sequence) model to study the dynamics of sequence modelling using linear state
-space models (SSM).
+### Summary of Algorithm
 
-We model sequences using the discrete-time linear SSM equations:
-
-NOTE: FINISH THIS PART UP LATER, also move it higher up in the implementation section
+Our training loop operates as follows:
+1. Generate input/target sequence (e.g., binary memory task)
+2. Run forward pass
+  - Update state: $x_{t+1}=\mathbf{A}x_{t}+\mathbf{B}u_t$
+  - Predict output: $y_t=\mathbf{C}x_t$
+3. Compute loss
+  - Use binary-cross entropy (or MSE)
+4. Backpropagation Through Time (BPTT)
+  - Accumulate gradients over the full sequence
+5. Gradient descent update
+  - Optionally apply clipping to prevent exploding gradients
+  - Update parameters $\mathbf{A}, \mathbf{B}, \mathbf{C}$
 
 <div align="center">
   <img src="simplified_ssm.png" alt="simplified_ssm" width="300">
