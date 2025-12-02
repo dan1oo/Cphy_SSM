@@ -1,15 +1,17 @@
 # Efficient Sequence Modelling with Structured State Spaces (S4)
 
 ## 🌟 Introduction
-This project implements a simplified version of the **Structured State-Space Model (S4)** introduced by Gu et al. (2022). The S4 model is designed to efficiently handle long-range dependencies in sequences by leveraging signal processing tools, state space theory, and fast convolution via the Fourier domain. Unlike RNNs and Transformers, S4 achieves linear time complexity in sequence length while still capturing complex, long-range dependencies.
+This project implements a simplified version of the **Structured State-Space Model (S4)** introduced by Gu et al. (2022), which is designed for efficient and scalable sequence modelling. Unlike RNNs or Transformers, S4 handles **long-range dependencies** with linear time complexity by combining tools from signal processing, control theory, and fast Fourier transforms.
 
-S4 is part of a growing class of models that aim to overcome the limitations of attention-based architectures by revisiting classical system dynamics. It uses specially structured matrices (HiPPO operators, diagonal plus low-rank components) to maintain and evolve hidden states over time. These ideas are drawn from control theory and combine strong theoretical foundations with practical efficiency.
+Fundamentally, S4 revisits classical continuous-time **state space models** and adapts them for deep learning. It uses structured matrices, such as **HiPPO operators** and **Diagonal Plus Low-Rank (DPLR)** representations to evolve hidden states to emphasize recent inputs while preserving global context. These techniques allow S4 to model sequences efficiently...
 
-In our project, we study how S4 performs on synthetic tasks like:
-- **Memory task:** remembering and reproducing a value from earlier in the sequence.
-- **Previous-bit task:** predicting a specific bit from a prior time step.
+In this project, we explore a minimal HiPPO-based state space model inspired by S4. Rather than implementing the full S4 pipeline with FFT-based kernel generation and DPLR compression, we focus on a simpler architecture that uses discretized HiPPO matrices, linear state updates over time, and gradient-based training via backpropagation through time (BPTT).
 
-We implemented the core model components, designed task generators, and evaluated how well S4 models long-term dependencies in toy data.
+We evaluate the model on two synthetic tasks:
+- **Memory task:** recall a bit seen earlier in the sequence
+- **Previous-bit task:** predict the bit immediately before the current one
+
+These toy experiments help us understand the core principles behind S4 and evaluate how well a simplified version can capture long-range dependencies in idealized test scenarios.
 
 ## ⚙️ Implementation and Algorithm
 
