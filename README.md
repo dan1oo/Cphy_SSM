@@ -58,7 +58,7 @@ representation), our implementation focuses on a more simplified interpretation 
 
 <!-- This design allows us to study the memory and recurrence dynamics of S4-like models while keeping the codebase manageable and easy to understand.  -->
 
-The S4 model combines continuous-time state space dynamics, HiPPO-based long-range memory, and fast discrete comvolution for efficient sequence modelling (Gu et al.).
+The S4 model combines continuous-time state space dynamics, HiPPO-based long-range memory, and fast discrete convolution for efficient sequence modelling (Gu et al.).
 
 <div align="center">
   <img src="s4_param.png" alt="s4 param" width="600">
