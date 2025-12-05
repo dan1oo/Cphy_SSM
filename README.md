@@ -176,7 +176,7 @@ Future improvements we'd like to explore:
 - Visualize intermediate activations and kernel responses
 
 ### 📝 References
-[1] Gu, Albert et al. "Efficiently Modeling Long Sequences with Structured State Spaces." *2022*. https://arxiv.org/abs/2111.00396
+[1] Gu, Albert et al. "Efficiently Modeling Long Sequences with Structured State Spaces." *\2022*. https://arxiv.org/abs/2111.00396
 
 [2] Gu, Albert et al. "HiPPO: Recurrent Memory with Optimal Polynomial Projections." *2020*. https://arxiv.org/abs/2008.07669 
 
