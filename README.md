@@ -66,28 +66,46 @@ The S4 model combines continuous-time state space dynamics, HiPPO-based long-ran
 
 ### Code Structure
 
-Here is a summary of how each module contributes to the implementation:
-- `hippo.py`:
-  - Constructs the **HiPPO-LegS** matrix $\mathbf{A}$ in continuous time
-  - Discretizes $\mathbf{A}$ using bilinear (Tustin) transform to give a learnable discrete-time state transition matrix
-- `helpers.py`:
-  - Defines utility functions:
-    - `sigmoid()`: maps logits to probabilities
-    - `binary_cross_entropy()`: used to compute classification loss
-- `model.py`:
-  - Defines the class `SimpleSSM`, our main model
-  - Implements the recurrence $x_{t+1}=\mathbf{A}x_{t}+\mathbf{B}u_t$, $y_t=\mathbf{C}x_t$
-  - Includes:
-    - `forward()`: computes outputs over time
-    - `loss_and_grads()`: computes binary-cross-entropy and gradients via BPTT
-    - `loss_and_grads_mse()`: an alternate loss function (MSE)
-    - `step()`: applies gradient descent with optional clipping
-- `generator_prevbit.py`/`generator_memory.py`
-  - Defines toy tasks for evaluating sequence learning (bit prediction, memory recall)
-- `Training/`:
-  - Houses all data and training logic
+
+
 - `SSM/`:
   - Houses all modules for model logic
+  - `hippo.py`:
+    - Constructs the **HiPPO-LegS** matrix $\mathbf{A}$ in continuous time
+    - Discretizes $\mathbf{A}$ using bilinear (Tustin) transform to give a learnable discrete-time state transition matrix
+  - `helpers.py`:
+    - Defines utility functions:
+      - `sigmoid()`: maps logits to probabilities
+      - `binary_cross_entropy()`: used to compute classification loss
+  - `model.py`:
+    - Defines the class `SimpleSSM`, our main model
+    - Implements the recurrence $x_{t+1}=\mathbf{A}x_{t}+\mathbf{B}u_t$, $y_t=\mathbf{C}x_t$
+    - Includes:
+      - `forward()`: computes outputs over time
+      - `loss_and_grads()`: computes binary-cross-entropy and gradients via BPTT
+      - `loss_and_grads_mse()`: an alternate loss function (MSE)
+      - `step()`: applies gradient descent with optional clipping
+- `Training/`:
+  - Houses all data and training logic
+  - `generator_prevbit.py`
+    - Defines toy tasks for evaluating sequence learning (bit prediction)
+  - `generator_memory.py`
+    - Defines toy tasks for evaluating sequence learning (memory recall)
+- `Demos/`:
+  - Houses our draft demos
+- `Copymemory_Task.ipynb`
+  - End to end model implementation (Data creation, model instantiation, training, testing) for memory recall task
+- `Prebit_Task.ipynb`
+  - End to end model implementation (Data creation, model instantiation, training, testing) for bit prediction task
+
+Others:
+
+- `assets/`
+  - Readme Images
+- `Resources/`
+  - Model Papers
+
+
 
 
 ### Summary of Algorithm
