@@ -134,10 +134,11 @@ Our training loop operates as follows:
 This section will be updated once model testing and training are finalized. In the final version, we plan to include:
 - `requirements.txt` for easy dependency installation
 - Example usage instructions for training and evaluation
-- A Jupyter notebook (`demos.ipynb`) demonstrating:
-  - Memory task performance
-  - Kernel visualization
+<!-- - Two Jupyter notebooks (`Prevbit_Task.ipynb` and `Copymemory_Task.ipynb`) demonstrating:
+  - Previous-Bit and Memory-Copy task performance
   - Model predictions on test sequences
+  - Loss Visualizations -->
+
 
 ### Installation
 
