@@ -1,6 +1,6 @@
 import numpy as np
-from hippo import hippo_legs, discretize_bilinear
-from helpers import sigmoid, binary_cross_entropy
+from SSM.hippo import hippo_legs, discretize_bilinear
+from SSM.helpers import sigmoid, binary_cross_entropy
 
 def softmax(logits: np.ndarray, axis: int = -1) -> np.ndarray:
     # numerically stable softmax
