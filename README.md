@@ -189,6 +189,21 @@ You can run each cell step-by-step and modify hyperparameters such as sequence l
 There are many preliminary model implementations under Demos/.
 
 
+
+### Results
+
+1. prev_bit vs copy_memory performance
+   - as you increase the sequence lengths, the logits increase in magnitude when performing copy_memory task compared to the logits that stay within their magnitude when prev_bit task
+   - In prev_bit task, the test accuracy didn't deteriorate with increasing sequence length, compared to copy_memory task, even with recursive calling of A matrix (through backpropagation-in-time algorithm we utilized)
+   - This is because the hidden matrix A doesn't need to 'memorize' that deep into the sequence history with prev_bit task, compared to the copy_memory task
+   - Interesting to see whether utilizing the convolution kernel algorithm instead of the backpropagation-in-time algorithm would allow the SSM to show good performance
+     with copy_memory task
+
+
+
+
+
+
 ## Reflection and Future Work
 We found this project both challenging and rewarding. At first, understanding the HiPPO framework and DPLR decomposition was conceptually difficult, but working through the code clarified how the theory translates into efficient computation. Writing our own kernel generation and FFT routines helped reinforce our understanding of spectral filtering.
 
