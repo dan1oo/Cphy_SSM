@@ -116,7 +116,7 @@ Our training loop operates as follows:
   - Update state: $x_{t+1}=\mathbf{A}x_{t}+\mathbf{B}u_t$
   - Predict output: $y_t=\mathbf{C}x_t$
 3. Compute loss
-  - Use binary-cross entropy (or MSE)
+  - Use binary-cross entropy
 4. Backpropagation Through Time (BPTT)
   - Accumulate gradients over the full sequence
 5. Gradient descent update
