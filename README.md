@@ -97,6 +97,8 @@ The S4 model combines continuous-time state space dynamics, HiPPO-based long-ran
   - End to end model implementation (Data creation, model instantiation, training, testing) for memory recall task
 - `Prebit_Task.ipynb`
   - End to end model implementation (Data creation, model instantiation, training, testing) for bit prediction task
+- 'hippo-experiments.ipynb'
+  - Walk through of how the loss function decrease proceess varies when different elements of the hippo matrix are padded
 
 Others:
 
