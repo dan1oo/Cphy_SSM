@@ -160,6 +160,7 @@ Make sure your project folder contains the following files:
 │   └── generator_prevbit.py
 ├── Copymemory_Task.ipynb
 ├── Prevbit_Task.ipynb
+|-- hippo-experiments.ipynb
 ├── requirements.txt
 ```
 
@@ -177,6 +178,7 @@ Prevbit_Task.ipynb
 - Includes visualizations of:
   - Training loss over epochs
   - Sequence predictions compared to actual output
+- **hippo-experiments**: includes diagrams of how the loss function varied in the prevbit task, when different elements of hippo were padded
 
 You can run each cell step-by-step and modify hyperparameters such as sequence length, delay, and state dimension as needed.
 
