@@ -129,7 +129,7 @@ To install required packages, run:
 pip install -r requirements.txt
 ```
 
-Make sure your project folder contains the following structure:
+Make sure your project folder contains the following files:
 
 ```text
 ├── SSM/
@@ -139,7 +139,8 @@ Make sure your project folder contains the following structure:
 ├── Training/
 │   ├── generator_memory.py
 │   └── generator_prevbit.py
-├── demos.ipynb
+├── Copymemory_Task.ipynb
+├── Prevbit_Task.ipynb
 ├── requirements.txt
 ```
 
@@ -148,10 +149,10 @@ Make sure your project folder contains the following structure:
 To train the model on one of the tasks (PrevBit and Memory Copy), open:
 
 ```bash
-demos.ipynb
+Copymemory_Task.ipynb
+Prevbit_Task.ipynb
 ```
 
-Inside the notebook:
 - **PrevBit Task**: Trains the SSM in a binary sequence prediction task where the target is the previous bit.
 - **Memory Copy Task**: Trains the SSM to remember and recall a short sequence after a delay.
 - Includes visualizations of:
@@ -159,6 +160,10 @@ Inside the notebook:
   - Sequence predictions compared to actual output
 
 You can run each cell step-by-step and modify hyperparameters such as sequence length, delay, and state dimension as needed.
+
+### Draft Implementations
+
+There are many preliminary model implementations under Demos/.
 
 
 ## Reflection and Future Work
