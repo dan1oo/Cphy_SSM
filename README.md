@@ -1,6 +1,6 @@
 # Efficient Sequence Modelling with Structured State Spaces (S4)
 
-## 🌟 Introduction
+## Introduction
 This project implements a simplified version of the **Structured State-Space Model (S4)** introduced by Gu et al. (2022), which is designed for efficient and scalable sequence modelling. Unlike RNNs or Transformers, S4 handles **long-range dependencies** with linear time complexity by combining tools from signal processing, control theory, and fast Fourier transforms.
 
 Fundamentally, S4 revisits classical continuous-time **state space models** and adapts them for deep learning. It uses structured matrices, such as **HiPPO operators** and **Diagonal Plus Low-Rank (DPLR)** representations, to evolve hidden states to emphasize recent inputs while preserving global context. These techniques allow S4 to model sequences efficiently with both rigorous design and practical scalability.
@@ -13,15 +13,15 @@ We evaluate the model on two synthetic tasks:
 
 These toy experiments help us understand the core principles behind S4 and evaluate how well a simplified version can capture long-range dependencies in idealized test scenarios.
 
-## ⚙️ Implementation and Algorithm
+## Implementation and Algorithm
 
-### 📚 Theoretical Background: State Space Models and S4
+### Theoretical Background: State Space Models and S4
 
 Structured State Space Models (SSM) describe how a latent state evolves over time in response to inputs and produces outputs..
 The general form of a continuous-time linear-time-invariant (LTI) SSM is:
 
 <div align="center">
-  <img src="SSM.png" alt="ssm" width="250">
+  <img src="assets/SSM.png" alt="ssm" width="250">
 </div>
 
 where:
@@ -42,7 +42,7 @@ In the S4 (Structured State Space Sequence) model proposed by Gu et al., the mat
 a **HiPPO matrix**, which is designed to preserve memory of past inputs with exponentially decaying weights:
 
 <div align="center">
-  <img src="hippo_matrix.png" alt="HiPPO matrix definition" width="400">
+  <img src="assets/hippo_matrix.png" alt="HiPPO matrix definition" width="400">
 </div>
 
 The HiPPO (High-Order Polynomial Projection Operator) framework projects the input function onto a polynomial
@@ -61,10 +61,10 @@ representation), our implementation focuses on a more simplified interpretation 
 The S4 model combines continuous-time state space dynamics, HiPPO-based long-range memory, and fast discrete convolution for efficient sequence modelling (Gu et al.).
 
 <div align="center">
-  <img src="s4_param.png" alt="s4 param" width="600">
+  <img src="assets/s4_param.png" alt="s4 param" width="600">
 </div>
 
-### 📁 Code Structure
+### Code Structure
 
 Here is a summary of how each module contributes to the implementation:
 - `hippo.py`:
@@ -109,9 +109,9 @@ Our training loop operates as follows:
   <img src="simplified_ssm.png" alt="simplified_ssm" width="300">
 </div> -->
 
-## 📦 Package Installation and Examples
+## Package Installation and Examples
 
-> ⚠️ *Note: Implementation and training are still in progress.*
+>  *Note: Implementation and training are still in progress.*
 
 This section will be updated once model testing and training are finalized. In the final version, we plan to include:
 - `requirements.txt` for easy dependency installation
@@ -121,7 +121,7 @@ This section will be updated once model testing and training are finalized. In t
   - Kernel visualization
   - Model predictions on test sequences
 
-### 🔧 Installation
+### Installation
 
 To install required packages, run:
 
@@ -143,7 +143,7 @@ Make sure your project folder contains the following structure:
 ├── requirements.txt
 ```
 
-### 🚀 Running the model
+### Running the model
 
 To train the model on one of the tasks (PrevBit and Memory Copy), open:
 
@@ -161,7 +161,7 @@ Inside the notebook:
 You can run each cell step-by-step and modify hyperparameters such as sequence length, delay, and state dimension as needed.
 
 
-## 🔍 Reflection and Future Work
+## Reflection and Future Work
 We found this project both challenging and rewarding. At first, understanding the HiPPO framework and DPLR decomposition was conceptually difficult, but working through the code clarified how the theory translates into efficient computation. Writing our own kernel generation and FFT routines helped reinforce our understanding of spectral filtering.
 
 Challenges included:
@@ -175,7 +175,7 @@ Future improvements we'd like to explore:
 - Evaluate performance on real-world data (e.g. ECG, language)
 - Visualize intermediate activations and kernel responses
 
-### 📝 References
+### References
 [1] Gu, Albert et al. "Efficiently Modeling Long Sequences with Structured State Spaces." *\2022*. https://arxiv.org/abs/2111.00396
 
 [2] Gu, Albert et al. "HiPPO: Recurrent Memory with Optimal Polynomial Projections." *2020*. https://arxiv.org/abs/2008.07669 
