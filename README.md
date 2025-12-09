@@ -177,7 +177,7 @@ You can run each cell step-by-step and modify hyperparameters such as sequence l
 
 ### Draft Implementations
 
-There are many preliminary model implementations under `Demos/`.
+Preliminary model implementations are located under `Demos/`.
 
 
 
