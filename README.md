@@ -183,31 +183,33 @@ Preliminary model implementations are located under `Demos/`.
 
 ### Results
 
-1. prev_bit vs copy_memory performance
-   - as you increase the sequence lengths, the logits increase in magnitude when performing copy_memory task compared to the logits that stay within their magnitude when prev_bit task
-   - In prev_bit task, the test accuracy didn't deteriorate with increasing sequence length, compared to copy_memory task, even with recursive calling of A matrix (through backpropagation-in-time algorithm we utilized)
-   - This is because the hidden matrix A doesn't need to 'memorize' that deep into the sequence history with prev_bit task, compared to the copy_memory task
-   - Interesting to see whether utilizing the convolution kernel algorithm instead of the backpropagation-in-time algorithm would allow the SSM to show good performance
-     with copy_memory task
-
-
-
-
+Previous-Bit vs Copy-Memory performance: 
+- **Previous-Bit Task:**
+  - Accuracy stayed high even for long sequences. Logits and hidden states remained stable becuase the model only needs one-step memory.
+- **Copy-Memory Task*:**
+  - As sequence length increased, logits and hidden states grew in magnitude. Recursive calling of the $A$ matrix during BPTT caused error accumulation and, which led to degraded performance.
+- Previous-Bit requires minimal memory, whereas Copy-Memory requires long-range retention that our recursive-only implementation cannot support reliably.
+- Using S4's convolution kernel (instead of pure recursion) would avoid repeatedly applying $A$ and may stabilize long-memory tasks.
 
 
 ## Reflection and Future Work
+
+
+
 We found this project both challenging and rewarding. At first, understanding the HiPPO framework and DPLR decomposition was conceptually difficult, but working through the code clarified how the theory translates into efficient computation. Writing our own kernel generation and FFT routines helped reinforce our understanding of spectral filtering.
 
 Challenges included:
-- Ensuring numerical stability in kernel generation
-- Debugging FFT-based convolutions and shape mismatches
-- Interpreting synthetic task formats and outputs
+- Understanding how HiPPO and discretization affect stability
+- Managing gradient growth when $A$ is applied repeatedly
+- Debugging training behavior on long sequences
+- Interpreting why hidden states and logits diverged in the Copy-Memory task
 
 Future improvements we'd like to explore:
-- Run longer and more stable training runs
-- Compare against a simple RNN baseline
-- Evaluate performance on real-world data (e.g. ECG, language)
-- Visualize intermediate activations and kernel responses
+- Implement the full S4 convolution kernel to avoid repeated multiplications by $A$
+- Compare against baseline models (e.g., RNN, GRU) on the same tasks
+- Test larger state dimensions and longer training to evaluate scaling behavior
+- Apply the model to real sequential data (e.g., signals or physical systems)
+- Visualize hidden state trajectories to better understand degradation patterns
 
 ### References
 [1] Gu, Albert et al. "Efficiently Modeling Long Sequences with Structured State Spaces." *\2022*. https://arxiv.org/abs/2111.00396
