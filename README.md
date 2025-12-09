@@ -154,7 +154,7 @@ Make sure your project folder contains the following files:
 ├── Copymemory_Task.ipynb
 ├── Prevbit_Task.ipynb
 ├── hippo-experiments.ipynb
-├── requirements.txt
+└── requirements.txt
 ```
 
 ### Running the model
