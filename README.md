@@ -181,7 +181,7 @@ You can run each cell step-by-step and modify hyperparameters such as sequence l
 Previous-Bit vs Copy-Memory performance: 
 - **Previous-Bit Task:**
   - Accuracy stayed high even for long sequences. Logits and hidden states remained stable becuase the model only needs one-step memory.
-- **Copy-Memory Task*:**
+- **Copy-Memory Task:**
   - As sequence length increased, logits and hidden states grew in magnitude. Recursive calling of the $A$ matrix during BPTT caused error accumulation and, which led to degraded performance.
 - Previous-Bit requires minimal memory, whereas Copy-Memory requires long-range retention that our recursive-only implementation cannot support reliably.
 - Using S4's convolution kernel (instead of pure recursion) would avoid repeatedly applying $A$ and may stabilize long-memory tasks.
