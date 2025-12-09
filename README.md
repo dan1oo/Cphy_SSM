@@ -91,7 +91,7 @@ The S4 model combines continuous-time state space dynamics, HiPPO-based long-ran
   - `generator_memory.py`
     - Defines toy tasks for evaluating sequence learning (memory recall)
 - `Demos/`:
-  - Houses our draft demos
+  - Houses our preliminary model implementations
 - `Copymemory_Task.ipynb`
   - End to end model implementation (Data creation, model instantiation, training, testing) for memory recall task
 - `Prebit_Task.ipynb`
@@ -174,11 +174,6 @@ Prevbit_Task.ipynb
 - **hippo-experiments**: includes diagrams of how the loss function varied in the prevbit task, when different elements of hippo were padded
 
 You can run each cell step-by-step and modify hyperparameters such as sequence length, delay, and state dimension as needed.
-
-### Draft Implementations
-
-Preliminary model implementations are located under `Demos/`.
-
 
 
 ### Results
