@@ -188,13 +188,13 @@ You can run each cell step-by-step and modify hyperparameters such as sequence l
 
 ## Reflection and Future Work
 
-Challenges:
+Challenges we encountered:
 - Understanding how HiPPO and discretization affect stability
 - Managing gradient growth when $A$ is applied repeatedly
 - Debugging training behavior on long sequences
 - Interpreting why hidden states and logits diverged in the Copy-Memory task
 
-Future improvements:
+Future improvements to explore:
 - Implement the full S4 convolution kernel to avoid repeated multiplications by $A$
 - Compare against baseline models (e.g., RNN, GRU) on the same tasks
 - Test larger state dimensions and longer training to evaluate scaling behavior
