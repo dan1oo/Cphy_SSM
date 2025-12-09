@@ -178,7 +178,6 @@ You can run each cell step-by-step and modify hyperparameters such as sequence l
 
 ### Results
 
-Previous-Bit vs Copy-Memory performance: 
 - **Previous-Bit Task:**
   - Accuracy stayed high even for long sequences. Logits and hidden states remained stable becuase the model only needs one-step memory.
 - **Copy-Memory Task:**
@@ -189,13 +188,13 @@ Previous-Bit vs Copy-Memory performance:
 
 ## Reflection and Future Work
 
-Challenges included:
+Challenges:
 - Understanding how HiPPO and discretization affect stability
 - Managing gradient growth when $A$ is applied repeatedly
 - Debugging training behavior on long sequences
 - Interpreting why hidden states and logits diverged in the Copy-Memory task
 
-Future improvements we'd like to explore:
+Future improvements:
 - Implement the full S4 convolution kernel to avoid repeated multiplications by $A$
 - Compare against baseline models (e.g., RNN, GRU) on the same tasks
 - Test larger state dimensions and longer training to evaluate scaling behavior
