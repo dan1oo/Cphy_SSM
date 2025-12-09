@@ -124,22 +124,11 @@ Our training loop operates as follows:
   - Optionally apply clipping to prevent exploding gradients
   - Update parameters $\mathbf{A}, \mathbf{B}, \mathbf{C}$
 
-<div align="center">
+<!-- <div align="center">
   <img src="simplified_ssm.png" alt="simplified_ssm" width="300">
-</div>
+</div> -->
 
 ## Package Installation and Examples
-
->  *Note: Implementation and training are still in progress.*
-
-This section will be updated once model testing and training are finalized. In the final version, we plan to include:
-- `requirements.txt` for easy dependency installation
-- Example usage instructions for training and evaluation
-<!-- - Two Jupyter notebooks (`Prevbit_Task.ipynb` and `Copymemory_Task.ipynb`) demonstrating:
-  - Previous-Bit and Memory-Copy task performance
-  - Model predictions on test sequences
-  - Loss Visualizations -->
-
 
 ### Installation
 
