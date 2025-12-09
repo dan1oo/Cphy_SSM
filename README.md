@@ -83,7 +83,6 @@ The S4 model combines continuous-time state space dynamics, HiPPO-based long-ran
     - Includes:
       - `forward()`: computes outputs over time
       - `loss_and_grads()`: computes binary-cross-entropy and gradients via BPTT
-      - `loss_and_grads_mse()`: an alternate loss function (MSE)
       - `step()`: applies gradient descent with optional clipping
 - `Training/`:
   - Houses all data and training logic
@@ -97,15 +96,15 @@ The S4 model combines continuous-time state space dynamics, HiPPO-based long-ran
   - End to end model implementation (Data creation, model instantiation, training, testing) for memory recall task
 - `Prebit_Task.ipynb`
   - End to end model implementation (Data creation, model instantiation, training, testing) for bit prediction task
-- 'hippo-experiments.ipynb'
+- `hippo-experiments.ipynb`
   - Walk through of how the loss function decrease proceess varies when different elements of the hippo matrix are padded
 
 Others:
 
 - `assets/`
-  - Readme Images
+  - Readme images
 - `Resources/`
-  - Model Papers
+  - Reference papers
 
 
 
@@ -125,9 +124,9 @@ Our training loop operates as follows:
   - Optionally apply clipping to prevent exploding gradients
   - Update parameters $\mathbf{A}, \mathbf{B}, \mathbf{C}$
 
-<!-- <div align="center">
+<div align="center">
   <img src="simplified_ssm.png" alt="simplified_ssm" width="300">
-</div> -->
+</div>
 
 ## Package Installation and Examples
 
