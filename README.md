@@ -189,10 +189,6 @@ Previous-Bit vs Copy-Memory performance:
 
 ## Reflection and Future Work
 
-
-
-We found this project both challenging and rewarding. At first, understanding the HiPPO framework and DPLR decomposition was conceptually difficult, but working through the code clarified how the theory translates into efficient computation. Writing our own kernel generation and FFT routines helped reinforce our understanding of spectral filtering.
-
 Challenges included:
 - Understanding how HiPPO and discretization affect stability
 - Managing gradient growth when $A$ is applied repeatedly
