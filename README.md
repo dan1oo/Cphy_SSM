@@ -145,8 +145,8 @@ Make sure your project folder contains the following files:
 │   ├── helpers.py
 │   ├── hippo.py
 │   ├── model.py
-|   ├── mmodel.py
-|   └── model_2.py
+│   ├── mmodel.py
+│   └── model_2.py
 
 ├── Training/
 │   ├── generator_memory.py
